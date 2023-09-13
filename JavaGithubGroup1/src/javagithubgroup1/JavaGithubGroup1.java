@@ -18,8 +18,7 @@ public class JavaGithubGroup1 {
         System.out.println("Mona");
         System.out.println("Reema");
         System.out.println("Bakerah");
-
-        System.out.println("Bakerah B");
+        System.out.println("jumana");
 
         
     }
