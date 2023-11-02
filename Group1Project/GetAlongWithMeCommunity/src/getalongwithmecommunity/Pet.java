@@ -1,3 +1,5 @@
+package getalongwithmecommunity;
+
 public class Pet {
     private int petId;
     private String name;
