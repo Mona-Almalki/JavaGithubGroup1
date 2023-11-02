@@ -39,14 +39,14 @@ public class GetAlongWithMeCommunity {
                 case 1:
                     while(choice==1){
                         registerVolunteer(scanner, volunteerList);
-                        System.out.println("Enter any number to return to home page or one to contunue register a volunteer");
+                        System.out.println("Enter any number to return to home page or one to continue register a volunteer");
                         choice = getValidIntInput(scanner);
                     }break;
                     
                 case 2:
                     while(choice==2){
                         petList.add(registerPetInfo(scanner));
-                        System.out.println("Enter any number to return to home page or one to contunue register a volunteer");
+                        System.out.println("Enter any number to return to home page or one to continue register a volunteer");
                         choice = getValidIntInput(scanner);
                     }break;
                     
