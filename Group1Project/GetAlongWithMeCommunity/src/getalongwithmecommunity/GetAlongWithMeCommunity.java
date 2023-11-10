@@ -10,8 +10,7 @@ public class GetAlongWithMeCommunity {
     
     public static void main(String[] args) {
         
-        //LinkedList volunteerList = new LinkedList();
-        ArrayList<Volunteer> volunteerList = new ArrayList<>();
+        LinkedList volunteerList = new LinkedList();
         Scanner scanner = new Scanner(System.in);
 
         
@@ -39,8 +38,9 @@ public class GetAlongWithMeCommunity {
             switch (choice) {
                 case 1:
                     while(choice==1){
-                        volunteerList.add(registerVolunteer(scanner));
-                        System.out.println("Enter any number to return to home page or 1 to continue register a volunteer");
+                        Volunteer volunteer = registerVolunteer(scanner);
+                        volunteerList.append(volunteer.name, volunteer.age, volunteer.phone, volunteer.email, volunteer.city);
+                        System.out.println("Enter any number to return to home page or one to continue register a volunteer");
                         choice = getValidIntInput(scanner);
                     }break;
                     
@@ -69,35 +69,27 @@ public class GetAlongWithMeCommunity {
     
     // Volunteer registration function
     public static Volunteer registerVolunteer(Scanner scanner) {
-        String name;
-        int age;
-        String phone;
-        String email;
-        String city;
         
         System.out.println("Enter Volunteer information:");
         
         System.out.print("Enter Your Name: ");
-        name = scanner.nextLine();
-        
+        String name = scanner.nextLine();
         System.out.print("Enter Your Age: ");
-        age = getValidIntInput(scanner);
+        int age = getValidIntInput(scanner);
+        scanner.nextLine();
         
         System.out.print("Enter Your Phone Number: ");
-        phone = scanner.nextLine();
+        String phone = scanner.nextLine();
         
         System.out.print("Enter Your Email Address: ");
-        email = scanner.nextLine();
+        String email = scanner.nextLine();
         
         System.out.print("Enter Your City: ");
-        city = scanner.nextLine();
+        String city = scanner.nextLine();
         
-        Volunteer volunteer= new Volunteer(name, age, phone, email, city);
         System.out.println("Volunteer registered successfully!");
         System.out.println("________________________________________________________________________");
-        
-        return volunteer;
-        
+        return new Volunteer(name, age, phone, email, city);
     }
     
      
