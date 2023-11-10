@@ -10,7 +10,8 @@ public class GetAlongWithMeCommunity {
     
     public static void main(String[] args) {
         
-        LinkedList volunteerList = new LinkedList();
+        //LinkedList volunteerList = new LinkedList();
+        ArrayList<Volunteer> volunteerList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
         
@@ -38,15 +39,15 @@ public class GetAlongWithMeCommunity {
             switch (choice) {
                 case 1:
                     while(choice==1){
-                        registerVolunteer(scanner, volunteerList);
-                        System.out.println("Enter any number to return to home page or one to continue register a volunteer");
+                        volunteerList.add(registerVolunteer(scanner));
+                        System.out.println("Enter any number to return to home page or 1 to continue register a volunteer");
                         choice = getValidIntInput(scanner);
                     }break;
                     
                 case 2:
                     while(choice==2){
                         petList.add(registerPetInfo(scanner));
-                        System.out.println("Enter any number to return to home page or one to continue register a volunteer");
+                        System.out.println("Enter any number to return to home page or 2 to continue register a volunteer");
                         choice = getValidIntInput(scanner);
                     }break;
                     
@@ -66,29 +67,40 @@ public class GetAlongWithMeCommunity {
     }
     
     
-    
-    ////volunteer registration function
-    public static void registerVolunteer(java.util.Scanner scanner, LinkedList volunteerList) {
+    // Volunteer registration function
+    public static Volunteer registerVolunteer(Scanner scanner) {
+        String name;
+        int age;
+        String phone;
+        String email;
+        String city;
+        
+        System.out.println("Enter Volunteer information:");
+        
         System.out.print("Enter Your Name: ");
-        String name = scanner.nextLine();
+        name = scanner.nextLine();
+        
         System.out.print("Enter Your Age: ");
-        int age = getValidIntInput(scanner);
-        scanner.nextLine();
+        age = getValidIntInput(scanner);
+        
         System.out.print("Enter Your Phone Number: ");
-        String phone = scanner.nextLine();
+        phone = scanner.nextLine();
+        
         System.out.print("Enter Your Email Address: ");
-        String email = scanner.nextLine();
+        email = scanner.nextLine();
+        
         System.out.print("Enter Your City: ");
-        String city = scanner.nextLine();
-
-        volunteerList.append(name, age, phone, email, city);
+        city = scanner.nextLine();
+        
+        Volunteer volunteer= new Volunteer(name, age, phone, email, city);
         System.out.println("Volunteer registered successfully!");
         System.out.println("________________________________________________________________________");
-
+        
+        return volunteer;
+        
     }
     
-    
-    
+     
     // Register pet info 
     public static Pet registerPetInfo(Scanner scanner){
         
