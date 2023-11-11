@@ -49,6 +49,9 @@ public class GetAlongWithMeCommunity {
                     PrintInfo(); break;
                     
                 case 4:
+                    adopt(scanner);
+                    break;
+                case 5:
                     System.out.println("Exiting Get Along with me community System. Goodbye!");
                     scanner.close();
                     System.exit(0);
@@ -71,7 +74,9 @@ public class GetAlongWithMeCommunity {
         System.out.println("________________________________________________________________________");
         System.out.println("3. Show all saved information");
         System.out.println("________________________________________________________________________");
-        System.out.println("4. Exit");
+        System.out.println("4. Adopt a Pet");
+        System.out.println("________________________________________________________________________");
+        System.out.println("5. Exit");
         System.out.print("\nEnter your choice: ");
     }
     
@@ -209,6 +214,64 @@ public class GetAlongWithMeCommunity {
             System.out.println("________________________________________________________________________");
         } 
     }
+
+     public static void adopt(Scanner scanner) {
+    System.out.println("\n********** Adopt a Pet **********");
+
+    System.out.print("Enter the pet ID: ");
+    int petId = getValidIntInput(scanner);
+
+    // Find the pet with the given ID
+    Pet petToRemove = null;
+    for (Pet pet : petList) {
+        if (pet.getPetId() == petId) {
+            petToRemove = pet;
+            break;
+        }
+    }
+
+    // Remove the pet from the list
+    if (petToRemove != null) {
+        petList.remove(petToRemove);
+        System.out.println("Pet with ID " + petId + " adopted successfully!");
+
+        // Read the entire file and store its contents
+        ArrayList<String> fileContents = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.startsWith("Volunteer")) { // Exclude volunteer lines
+                    String[] petInfo = line.split(",");
+                    int currentPetId = Integer.parseInt(petInfo[0].split("=")[1]);
+
+                    // Check if the line corresponds to the pet being adopted
+                    if (currentPetId == petId) {
+                        continue; // Skip the line to exclude the adopted pet
+                    }
+                }
+
+                // Add the line to the file contents
+                fileContents.add(line);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error in reading from file");
+            return;
+        }
+
+        // Update the file with modified pet information
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (String line : fileContents) {
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("Pet information updated successfully!");
+        } catch (IOException ex) {
+            System.out.println("Error in writing to file");
+        }
+    } else {
+        System.out.println("Pet with ID " + petId + " not found.");
+    }
+}
     
     
     
