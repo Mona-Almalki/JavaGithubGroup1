@@ -46,7 +46,7 @@ public class GetAlongWithMeCommunity {
                     }break;
                     
                 case 3:
-                    PrintPetInfo(); break;
+                    PrintInfo(); break;
                     
                 case 4:
                     System.out.println("Exiting Get Along with me community System. Goodbye!");
@@ -69,7 +69,7 @@ public class GetAlongWithMeCommunity {
         System.out.println("________________________________________________________________________");
         System.out.println("2. Register a Pet");
         System.out.println("________________________________________________________________________");
-        System.out.println("3. Show all saved pet information");
+        System.out.println("3. Show all saved information");
         System.out.println("________________________________________________________________________");
         System.out.println("4. Exit");
         System.out.print("\nEnter your choice: ");
@@ -105,19 +105,25 @@ public class GetAlongWithMeCommunity {
                 
                 
                 //Read Volunteer info from file
-                else if(line.contains("Volunteer")){
-                    
-                }
-                
-                
-            }
-        } catch (IOException | NumberFormatException e) {}
+                else if(parts[0].startsWith("Volunteer")) {
+                    String[] volunteerInfoParts = parts[0].split("=");
+                    if (volunteerInfoParts.length == 2) {
+                        String name = volunteerInfoParts[1].trim();
+                        int age = Integer.parseInt(parts[1].substring(parts[1].indexOf("=") + 1).trim());
+                        String phone = parts[2].substring(parts[2].indexOf("=") + 1).trim();
+                        String email = parts[3].substring(parts[3].indexOf("=") + 1).trim();
+                        String city = parts[4].substring(parts[4].indexOf("=") + 1).trim();
+
+                        volunteerList.append(name, age, phone, email, city);} 
+                    else {
+                        System.out.println("Invalid line: " + line); }
+    }}}catch (IOException | NumberFormatException e){}
 
     }
     
     
-    // Print all Pet info 
-    public static void PrintPetInfo(){
+    // Print all info 
+    public static void PrintInfo(){
         try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -131,8 +137,8 @@ public class GetAlongWithMeCommunity {
     
     
     
-    ////volunteer registration function
-    public static void registerVolunteer(java.util.Scanner scanner, LinkedList volunteerList) {
+    // Volunteer registration function
+    public static void registerVolunteer(Scanner scanner, LinkedList volunteerList) {
         System.out.print("Enter Your Name: ");
         String name = scanner.nextLine();
         System.out.print("Enter Your Age: ");
@@ -145,10 +151,17 @@ public class GetAlongWithMeCommunity {
         System.out.print("Enter Your City: ");
         String city = scanner.nextLine();
 
+        Volunteer volunteer = new Volunteer(name, age, phone, email, city);
         volunteerList.append(name, age, phone, email, city);
-        System.out.println("Volunteer registered successfully!");
-        System.out.println("________________________________________________________________________");
 
+        // Save volunteer information to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            writer.write(volunteer.toString());
+            writer.newLine();
+            System.out.println("Volunteer registered successfully!");
+            System.out.println("________________________________________________________________________");
+
+        } catch (IOException e) {}
     }
     
     
