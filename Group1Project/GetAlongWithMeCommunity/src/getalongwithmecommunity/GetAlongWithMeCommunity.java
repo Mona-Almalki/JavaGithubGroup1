@@ -72,7 +72,7 @@ public class GetAlongWithMeCommunity {
         System.out.println("________________________________________________________________________");
         System.out.println("2. Register a Pet");
         System.out.println("________________________________________________________________________");
-        System.out.println("3. Show all saved information");
+        System.out.println("3. Show all saved Pet information");
         System.out.println("________________________________________________________________________");
         System.out.println("4. Adopt a Pet");
         System.out.println("________________________________________________________________________");
@@ -132,7 +132,8 @@ public class GetAlongWithMeCommunity {
         try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                if(line.contains("petId"))
+                    System.out.println(line);
             }
        
         }catch (IOException ex) {
