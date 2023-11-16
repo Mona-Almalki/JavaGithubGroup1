@@ -62,6 +62,19 @@ public class GetAlongWithMeCommunity {
         
     }
     
+    private static void displayEvent(){
+
+
+
+
+
+
+
+
+
+
+        
+    }
     
     //Display menu
     private static void displayMenu(){
