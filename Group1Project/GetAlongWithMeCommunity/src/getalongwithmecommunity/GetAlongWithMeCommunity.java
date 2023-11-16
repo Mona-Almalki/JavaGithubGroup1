@@ -127,13 +127,14 @@ public class GetAlongWithMeCommunity {
     }
     
     
-    // Print all info 
-    public static void PrintInfo(){
+    // Print pet info 
+    public static void PrintPetInfo(){
         try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if(line.contains("petId"))
+                if(line.contains("petId")&&line.contains("Approve"))
                     System.out.println(line);
+                
             }
        
         }catch (IOException ex) {
