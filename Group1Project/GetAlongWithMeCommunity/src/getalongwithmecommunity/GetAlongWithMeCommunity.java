@@ -64,16 +64,7 @@ public class GetAlongWithMeCommunity {
     
     private static void displayEvent(){
 
-
-
-
-
-
-
-
-
-
-        
+         System.out.println("\n                Welcome to Get Along with Me Community                ");
     }
     
     //Display menu
