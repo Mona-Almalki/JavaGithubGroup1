@@ -57,6 +57,9 @@ public class Pet {
     }
 
     
+    public String toString() {
+        return "petId=" + petId + ",name=" + name + ",type=" + type + ",age=" + age +",Approve="+ isApproved +"\n" ;
+    }
     
     
     
