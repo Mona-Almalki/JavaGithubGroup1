@@ -9,6 +9,7 @@ public class User {
     private String phone;
     private String email;
     private String city;
+    private Boolean volunteer=false;
 
     public User(String name, int age, String phone, String email, String city) {
         this.name = name;
@@ -48,19 +49,21 @@ public class User {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             writer.write(pet.toString());
             writer.newLine();
-            System.out.println("Pet information has been successfully registered.");
-            System.out.println("________________________________________________________________________");
-
+            recieveApproval();
+            
         } catch (IOException e) {
             e.printStackTrace();}
        
     }
     
     public void recieveApproval(){
-        
+        System.out.println("Pet information has been successfully registered.");
+        System.out.println("________________________________________________________________________");
+
     }
     
     public void volunteerForCommuntiy(){
-        
+        volunteer=true;
     }
+    
 }
