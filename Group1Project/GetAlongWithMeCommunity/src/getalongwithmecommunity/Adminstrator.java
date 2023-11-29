@@ -68,7 +68,12 @@ public class Adminstrator {
     
     
     
-    /*public void addEvent(){
-        
-    }*/
+    public void addEvent(String FILE_NAME,String eventID,String eventName,String eventDate,String eventPlace){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            writer.write("EventID="+eventID+" ,EventName="+eventName+" ,EventDate="+eventDate+" ,EventPlace="+eventPlace);
+            System.out.println("Event information added successfully!");
+        } catch (IOException ex) {
+            System.out.println("Error in writing to file");
+            }
+    }
 }
