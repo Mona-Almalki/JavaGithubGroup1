@@ -11,9 +11,8 @@ import java.io.*;
 public class GetAlongWithMeCommunity {
 
     private static final String FILE_NAME = "InfoFile.txt";
-     private static final String FILE_NAME = "user_database.txt";
-    private static final LinkedList volunteerList = new LinkedList();
     private static final ArrayList<Pet> petList = new ArrayList<>();
+    private static final ArrayList<User> userList = new ArrayList<>();
 
     public static void main(String[] args) {
         
@@ -52,9 +51,11 @@ public class GetAlongWithMeCommunity {
                 
                         // Create a User object with the collected information
                         User newUser = new User(name, age, phone, email, city);
+
+                        userList.add(newUser);
                 
                         // Register the user using the registerUser method
-                        newUser.registerUser("user_database.txt");
+                        newUser.registerUser("InfoFile.txt");
             
                         scanner.close();
                         System.out.println("Enter any number to return to home page or 1 to contunue register a volunteer");
