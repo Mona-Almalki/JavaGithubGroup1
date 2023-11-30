@@ -1,9 +1,9 @@
 package getalongwithmecommunity;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.*;
+import java.util.ArrayList;
 
 
 
@@ -14,7 +14,9 @@ public class GetAlongWithMeCommunity {
     private static final ArrayList<Pet> petList = new ArrayList<>();
     private static final ArrayList<User> userList = new ArrayList<>();
 
-    public static void main(String[] args) {
+
+    
+    public static void main(String[] args) throws IOException {
         
         //
         Scanner scanner = new Scanner(System.in);
@@ -51,13 +53,10 @@ public class GetAlongWithMeCommunity {
                 
                         // Create a User object with the collected information
                         User newUser = new User(name, age, phone, email, city);
-
-                        userList.add(newUser);
                 
                         // Register the user using the registerUser method
                         newUser.registerUser("InfoFile.txt");
-            
-                        scanner.close();
+           
                         System.out.println("Enter any number to return to home page or 1 to contunue register a volunteer");
                         choice = getValidIntInput(scanner);
                     }break;
@@ -70,12 +69,22 @@ public class GetAlongWithMeCommunity {
                     }break;
                     
                 case 3:
-                    PrintInfo(); break;
+                     displayAllPets(); break;
                     
                 case 4:
                     adopt(scanner);
                     break;
+                    
                 case 5:
+                    System.out.println("Volunteer for the community");
+                    System.out.print("Enter your name: ");
+                    String volunteerName = scanner.nextLine();
+                    volunteer(volunteerName);
+                    break;
+                case 6:
+                    displayAllVolunteers();
+                    break;
+                case 7:
                     System.out.println("Exiting Get Along with me community System. Goodbye!");
                     scanner.close();
                     System.exit(0);
@@ -100,18 +109,33 @@ public class GetAlongWithMeCommunity {
         System.out.println("________________________________________________________________________");
         System.out.println("2. Register a Pet");
         System.out.println("________________________________________________________________________");
-        System.out.println("3. Show all saved Pet information");
+        System.out.println("3. Show all Pet information");
         System.out.println("________________________________________________________________________");
         System.out.println("4. Adopt a Pet");
         System.out.println("________________________________________________________________________");
-        System.out.println("5. Exit");
+        System.out.println("5. Volunteer for the community");
+        System.out.println("________________________________________________________________________");
+        System.out.println("6. Show all Volunteer information");
+        System.out.println("________________________________________________________________________");
+        System.out.println("7. Exit");
         System.out.print("\nEnter your choice: ");
     }
     
-    
-    
-    /// read from file 
-    public static void ReadFile(){
+    //handle volunteering
+    private static void volunteer(String volunteerName) {
+    for (User user : userList) {
+        if (user.getName().equals(volunteerName)) {
+            user.volunteerForCommuntiy();
+            user.updateVolunteerStatus(FILE_NAME, true);
+            System.out.println(volunteerName + " is now a volunteer for the community!");
+            return;
+        }
+    }
+    System.out.println("User with name " + volunteerName + " not found.");
+}
+
+    // read from file 
+    public static void ReadFile() throws IOException{
         
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
@@ -137,20 +161,25 @@ public class GetAlongWithMeCommunity {
                 }}
                 
                 
-                //Read Volunteer info from file
-                else if(parts[0].startsWith("Volunteer")) {
-                    String[] volunteerInfoParts = parts[0].split("=");
-                    if (volunteerInfoParts.length == 2) {
-                        String name = volunteerInfoParts[1].trim();
-                        int age = Integer.parseInt(parts[1].substring(parts[1].indexOf("=") + 1).trim());
-                        String phone = parts[2].substring(parts[2].indexOf("=") + 1).trim();
-                        String email = parts[3].substring(parts[3].indexOf("=") + 1).trim();
-                        String city = parts[4].substring(parts[4].indexOf("=") + 1).trim();
+                //Read User info from file
+                else if (parts[0].startsWith("User Name=")) {
+                // Read user info from file
+                String[] UserInfoParts = parts[0].split("=");
 
-                        volunteerList.append(name, age, phone, email, city);} 
-                    else {
-                        System.out.println("Invalid line: " + line); }
-    }}}catch (IOException | NumberFormatException e){}
+                if (UserInfoParts.length == 2) {
+                    String name = UserInfoParts[1].trim();
+                    int age = Integer.parseInt(parts[1].substring(parts[1].indexOf("=") + 1).trim());
+                    String phone = parts[2].substring(parts[2].indexOf("=") + 1).trim();
+                    String email = parts[3].substring(parts[3].indexOf("=") + 1).trim();
+                    String city = parts[4].substring(parts[4].indexOf("=") + 1).trim();
+
+                    User user = new User(name, age, phone, email, city);
+                    userList.add(user);
+                } else {
+                    System.out.println("Invalid line: " + line);
+                }
+            }
+        }}catch (IOException | NumberFormatException e){}
 
     }
     
@@ -307,6 +336,24 @@ public class GetAlongWithMeCommunity {
     }
 
     return input;
+}
+    
+    public static void displayAllPets() {
+    System.out.println("All saved pets:");
+    for (Pet pet : petList) {
+        System.out.println(pet);
+    }
+    System.out.println("______________________________");
+}
+
+public static void displayAllVolunteers() {
+    System.out.println("\nAll Volunteers in User List:");
+    for (User user : userList) {
+        if (user.isVolunteer()) {
+            System.out.println(user);
+        }
+    }
+    System.out.println("______________________________");
 }
 
     

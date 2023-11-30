@@ -1,4 +1,6 @@
+package getalongwithmecommunity;
 
+import getalongwithmecommunity.Pet;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -18,6 +20,15 @@ public class User {
         this.email = email;
         this.city = city;
     }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public boolean isVolunteer() {
+        return volunteer;
+    }
+    
 
     public void registerUser(String FILE_NAME) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
@@ -73,13 +84,38 @@ public class User {
 
     }
     
+    
     public void volunteerForCommuntiy(){
-        volunteer=true;
+        volunteer=true;}
+
+    
+    public void updateVolunteerStatus(String FILE_NAME, boolean newVolunteerStatus) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
+         BufferedWriter writer = new BufferedWriter(new FileWriter("temp.txt"))) {
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.contains("Volunteer=" + name)) {
+                writer.write("Volunteer=" + name + "," + age + "," + phone + "," + email + "," + city + "," + newVolunteerStatus);
+            } else {
+                writer.write(line);
+            }
+            writer.newLine();
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+
+    // Rename the temporary file to the original file
+    File tempFile = new File("temp.txt");
+    File originalFile = new File(FILE_NAME);
+    tempFile.renameTo(originalFile);
+}
+
 
      @Override
     public String toString() {
-        return "Name: " + name + "\nAge: " + age + "\nPhone: " + phone + "\nEmail: " + email + "\nCity: " + city + "\nVolunteer: " + volunteer;
+        return "User Name: " + name + "Age: " + age + "Phone: " + phone + "Email: " + email + "City: " + city + "Volunteer: " + volunteer;
     }
     
 }
