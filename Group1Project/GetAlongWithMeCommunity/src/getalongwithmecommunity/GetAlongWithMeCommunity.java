@@ -11,6 +11,7 @@ import java.io.*;
 public class GetAlongWithMeCommunity {
 
     private static final String FILE_NAME = "InfoFile.txt";
+     private static final String FILE_NAME = "user_database.txt";
     private static final LinkedList volunteerList = new LinkedList();
     private static final ArrayList<Pet> petList = new ArrayList<>();
 
