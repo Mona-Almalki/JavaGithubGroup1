@@ -18,6 +18,17 @@ public class User {
         this.email = email;
         this.city = city;
     }
+
+    public void registerUser(String FILE_NAME) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            writer.write(toString());
+            writer.newLine();
+            System.out.println("User information has been successfully registered.");
+            System.out.println("________________________________________________________________________");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     
     public void searchForPets(String FILE_NAME){
@@ -64,6 +75,11 @@ public class User {
     
     public void volunteerForCommuntiy(){
         volunteer=true;
+    }
+
+     @Override
+    public String toString() {
+        return "Name: " + name + "\nAge: " + age + "\nPhone: " + phone + "\nEmail: " + email + "\nCity: " + city + "\nVolunteer: " + volunteer;
     }
     
 }
