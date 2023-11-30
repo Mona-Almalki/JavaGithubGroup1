@@ -33,7 +33,29 @@ public class GetAlongWithMeCommunity {
             switch (choice) {
                 case 1:
                     while(choice==1){
-                        registerVolunteer(scanner, volunteerList);
+                        System.out.print("Enter your name: ");
+                        String name = scanner.nextLine();
+                
+                        System.out.print("Enter your age: ");
+                        int age = scanner.nextInt();
+                        scanner.nextLine();
+                
+                        System.out.print("Enter your phone number: ");
+                        String phone = scanner.nextLine();
+                
+                        System.out.print("Enter your email: ");
+                        String email = scanner.nextLine();
+                
+                        System.out.print("Enter your city: ");
+                        String city = scanner.nextLine();
+                
+                        // Create a User object with the collected information
+                        User newUser = new User(name, age, phone, email, city);
+                
+                        // Register the user using the registerUser method
+                        newUser.registerUser("user_database.txt");
+            
+                        scanner.close();
                         System.out.println("Enter any number to return to home page or 1 to contunue register a volunteer");
                         choice = getValidIntInput(scanner);
                     }break;
@@ -72,7 +94,7 @@ public class GetAlongWithMeCommunity {
         System.out.println("\n                Welcome to Get Along with Me Community                ");
         System.out.println("________________________________________________________________________");
         System.out.println("Services:");
-        System.out.println("1. Register a Volunteer");
+        System.out.println("1. User registration");
         System.out.println("________________________________________________________________________");
         System.out.println("2. Register a Pet");
         System.out.println("________________________________________________________________________");
@@ -145,36 +167,6 @@ public class GetAlongWithMeCommunity {
            System.out.print("error in reading file");
         }
     }
-    
-    
-    
-    // Volunteer registration function
-    public static void registerVolunteer(Scanner scanner, LinkedList volunteerList) {
-        System.out.print("Enter Your Name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter Your Age: ");
-        int age = getValidIntInput(scanner);
-        scanner.nextLine();
-        System.out.print("Enter Your Phone Number: ");
-        String phone = scanner.nextLine();
-        System.out.print("Enter Your Email Address: ");
-        String email = scanner.nextLine();
-        System.out.print("Enter Your City: ");
-        String city = scanner.nextLine();
-
-        Volunteer volunteer = new Volunteer(name, age, phone, email, city);
-        volunteerList.append(name, age, phone, email, city);
-
-        // Save volunteer information to the file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-            writer.write(volunteer.toString());
-            writer.newLine();
-            System.out.println("Volunteer registered successfully!");
-            System.out.println("________________________________________________________________________");
-
-        } catch (IOException e) {}
-    }
-    
     
     
     // Register pet info 
