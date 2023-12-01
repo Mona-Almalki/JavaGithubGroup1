@@ -85,37 +85,57 @@ public class User {
     }
     
     
-    public void volunteerForCommuntiy(){
-        volunteer=true;}
+    // Method to update volunteer status based on username
+    public static void updateVolunteerStatus(String userName, boolean status) {
+        ArrayList<String> fileContents = new ArrayList<>();
 
-    
-    public void updateVolunteerStatus(String FILE_NAME, boolean newVolunteerStatus) {
-    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
-         BufferedWriter writer = new BufferedWriter(new FileWriter("temp.txt"))) {
-
-        String line;
-        while ((line = reader.readLine()) != null) {
-            if (line.contains("Volunteer=" + name)) {
-                writer.write("Volunteer=" + name + "," + age + "," + phone + "," + email + "," + city + "," + newVolunteerStatus);
-            } else {
-                writer.write(line);
+        try (BufferedReader reader = new BufferedReader(new FileReader("UserDB.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("User Name= " + userName)) {
+                    // Update the volunteer status in the line
+                    line = line.replace("Volunteer= false", "Volunteer= " + status);
+                }
+                fileContents.add(line);
             }
-            writer.newLine();
+        } catch (IOException ex) {
+            System.out.println("Error in reading from file");
+            return;
         }
-    } catch (IOException e) {
-        e.printStackTrace();
+
+        // Overwrite the file with modified volunteer status
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("UserDB.txt"))) {
+            for (String line : fileContents) {
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("Volunteer status updated successfully!");
+        } catch (IOException ex) {
+            System.out.println("Error in writing to file");
+        }
+    }
+    
+    public static void displayAllVolunteers() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("UserDB.txt"))) {
+            String line;
+            System.out.println("Volunteers:");
+
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("Volunteer= true")) {
+                    System.out.println(line);
+                }
+            }
+
+            System.out.println("______________________________");
+        } catch (IOException ex) {
+            System.out.println("Error in reading from file");
+        }
     }
 
-    // Rename the temporary file to the original file
-    File tempFile = new File("temp.txt");
-    File originalFile = new File(FILE_NAME);
-    tempFile.renameTo(originalFile);
-}
-
-
+    
      @Override
     public String toString() {
-        return "User Name: " + name + "Age: " + age + "Phone: " + phone + "Email: " + email + "City: " + city + "Volunteer: " + volunteer;
+        return "User Name= " + name + " Age= " + age + " Phone= " + phone + " Email= " + email + " City= " + city + " Volunteer= " + volunteer +"\n";
     }
     
 }
