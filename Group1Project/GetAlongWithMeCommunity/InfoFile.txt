@@ -1,0 +1,13 @@
+petId=1001,name=Buddy,type=Dog,age=2
+petId=1002,name=Mittens,type=Cat,age=3
+petId=1003,name=Rex,type=Dog,age=1
+petId=1004,name=Fluffy,type=Hamster,age=1
+petId=1005,name=Whiskers,type=Cat,age=5
+petId=1006,name=Max,type=Dog,age=4
+petId=1007,name=Charlie,type=Parrot,age=2
+petId=1008,name=Oliver,type=Cat,age=3
+petId=1009,name=Luna,type=Rabbit,age=1
+petId=1010,name=Rocky,type=Turtle,age=2
+petId=1011,name=Bella,type=Fish,age=1
+petId=1012,name=Chloe,type=Guinea Pig,age=2
+petId=1013,name=Leo,type=Cat,age=3
