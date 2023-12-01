@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class GetAlongWithMeCommunity {
 
     private static final String FILE_NAME = "InfoFile.txt";
+    private static final String User_File = "UserDB.txt";
     private static final ArrayList<Pet> petList = new ArrayList<>();
     private static final ArrayList<User> userList = new ArrayList<>();
 
@@ -53,9 +54,11 @@ public class GetAlongWithMeCommunity {
                 
                         // Create a User object with the collected information
                         User newUser = new User(name, age, phone, email, city);
+                        userList.add(newUser);
+
                 
                         // Register the user using the registerUser method
-                        newUser.registerUser("InfoFile.txt");
+                        newUser.registerUser("UserDB.txt");
            
                         System.out.println("Enter any number to return to home page or 1 to contunue register a volunteer");
                         choice = getValidIntInput(scanner);
@@ -77,12 +80,18 @@ public class GetAlongWithMeCommunity {
                     
                 case 5:
                     System.out.println("Volunteer for the community");
+
+                    // Ask for the user's name
                     System.out.print("Enter your name: ");
-                    String volunteerName = scanner.nextLine();
-                    volunteer(volunteerName);
+                    String userName = scanner.nextLine();
+
+                    // Call the updateVolunteerStatus method
+                    User.updateVolunteerStatus(userName, true);
+
                     break;
                 case 6:
-                    displayAllVolunteers();
+                    System.out.println("Showing all volunteers:");
+                    User.displayAllVolunteers();
                     break;
                 case 7:
                     System.out.println("Exiting Get Along with me community System. Goodbye!");
@@ -120,19 +129,8 @@ public class GetAlongWithMeCommunity {
         System.out.println("7. Exit");
         System.out.print("\nEnter your choice: ");
     }
-    
-    //handle volunteering
-    private static void volunteer(String volunteerName) {
-    for (User user : userList) {
-        if (user.getName().equals(volunteerName)) {
-            user.volunteerForCommuntiy();
-            user.updateVolunteerStatus(FILE_NAME, true);
-            System.out.println(volunteerName + " is now a volunteer for the community!");
-            return;
-        }
-    }
-    System.out.println("User with name " + volunteerName + " not found.");
-}
+
+
 
     // read from file 
     public static void ReadFile() throws IOException{
@@ -159,44 +157,8 @@ public class GetAlongWithMeCommunity {
                     } else 
                         System.out.println("Invalid line: " + line);
                 }}
-                
-                
-                //Read User info from file
-                else if (parts[0].startsWith("User Name=")) {
-                // Read user info from file
-                String[] UserInfoParts = parts[0].split("=");
-
-                if (UserInfoParts.length == 2) {
-                    String name = UserInfoParts[1].trim();
-                    int age = Integer.parseInt(parts[1].substring(parts[1].indexOf("=") + 1).trim());
-                    String phone = parts[2].substring(parts[2].indexOf("=") + 1).trim();
-                    String email = parts[3].substring(parts[3].indexOf("=") + 1).trim();
-                    String city = parts[4].substring(parts[4].indexOf("=") + 1).trim();
-
-                    User user = new User(name, age, phone, email, city);
-                    userList.add(user);
-                } else {
-                    System.out.println("Invalid line: " + line);
-                }
-            }
         }}catch (IOException | NumberFormatException e){}
 
-    }
-    
-    
-    // Print pet info 
-    public static void PrintPetInfo(){
-        try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if(line.contains("petId")&&line.contains("Approve"))
-                    System.out.println(line);
-                
-            }
-       
-        }catch (IOException ex) {
-           System.out.print("error in reading file");
-        }
     }
     
     
@@ -345,18 +307,7 @@ public class GetAlongWithMeCommunity {
     }
     System.out.println("______________________________");
 }
-
-public static void displayAllVolunteers() {
-    System.out.println("\nAll Volunteers in User List:");
-    for (User user : userList) {
-        if (user.isVolunteer()) {
-            System.out.println(user);
-        }
-    }
-    System.out.println("______________________________");
-}
-
-    
+  
 }
     
     
