@@ -46,7 +46,7 @@ public class User {
         try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if(line.contains("petId")&&line.contains("Approve"))
+                if(line.contains("petId"))
                     System.out.println(line);
                 
             }
