@@ -94,7 +94,13 @@ public class GetAlongWithMeCommunity {
                     System.out.println("Showing all volunteers:");
                     User.displayAllVolunteers();
                     break;
-                case 7:
+                case 7: 
+                    addEvent(administrator);
+                    break;
+                case 8: 
+                    administrator.displayAllEvents(Event_File);
+                    break;
+                case 9:
                     System.out.println("Exiting Get Along with me community System. Goodbye!");
                     scanner.close();
                     System.exit(0);
@@ -127,7 +133,11 @@ public class GetAlongWithMeCommunity {
         System.out.println("________________________________________________________________________");
         System.out.println("6. Show all Volunteer information");
         System.out.println("________________________________________________________________________");
-        System.out.println("7. Exit");
+         System.out.println("7. adding an event");
+        System.out.println("________________________________________________________________________");
+         System.out.println("8. displaying all events");
+        System.out.println("________________________________________________________________________");
+        System.out.println("9. Exit");
         System.out.print("\nEnter your choice: ");
     }
 
