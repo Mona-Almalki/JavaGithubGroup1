@@ -60,7 +60,7 @@ public class User {
         Pet petToRemove = null;
         for (Pet pet : petList) {
             if (pet.getPetId() == petId) {
-                return petToRemove;
+                return petToRemove=pet;
             }
         }
         return petToRemove; 
