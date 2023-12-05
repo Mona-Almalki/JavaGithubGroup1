@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 public class GetAlongWithMeCommunity {
 
-    private static final String FILE_NAME = "InfoFile.txt";
+    private static final String Pet_File = "PetDB.txt";
+    private static final String Event_File = "EventDB.txt";
     private static final String User_File = "UserDB.txt";
     private static final ArrayList<Pet> petList = new ArrayList<>();
     private static final ArrayList<User> userList = new ArrayList<>();
