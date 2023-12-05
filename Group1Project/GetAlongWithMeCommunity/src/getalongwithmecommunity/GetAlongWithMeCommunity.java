@@ -52,9 +52,10 @@ public class GetAlongWithMeCommunity {
             System.out.println("2. Register a Pet");
             System.out.println("2. Register a Pet");
             System.out.println("3. Display All Pets");
-            System.out.println("4. Update Volunteer Status");
-            System.out.println("5. Display All Events");
-            System.out.println("6. Exit");
+            System.out.println("4. Adopt a Pet");
+            System.out.println("5. Update Volunteer Status");
+            System.out.println("6. Display All Events");
+            System.out.println("7. Exit");
             System.out.println("__________________________________");
             System.out.print("\nEnter your choice: ");
 
@@ -94,6 +95,9 @@ public class GetAlongWithMeCommunity {
                     displayAllPets();
                     break;
                 case 4:
+                     adopt(scanner);
+                    break;
+                case 5:
                      System.out.println("Volunteer for the community");
 
                     // Ask for the user's name
@@ -103,10 +107,10 @@ public class GetAlongWithMeCommunity {
                     // Call the updateVolunteerStatus method
                     User.updateVolunteerStatus(userName, true);
                     break;
-                case 5:
+                case 6:
                     administrator.displayAllEvents(Event_File);
                     break;
-                case 6:
+                case 7:
                     System.out.println("Exiting User Menu. Goodbye!");
                     scanner.close();
                     System.exit(0);
@@ -146,6 +150,7 @@ public class GetAlongWithMeCommunity {
                     administrator.displayAllEvents(Event_File);
                     break;
                 case 4:
+                    System.out.println("Showing all volunteers:");
                     User.displayAllVolunteers();
                     break;
                 case 5:
@@ -161,91 +166,6 @@ public class GetAlongWithMeCommunity {
         }
     }
 
-        //
-        while (true) {
-            displayMenu() ;
-            
-            int choice = getValidIntInput(scanner);
-            scanner.nextLine();
-
-            
-            switch (choice) {
-                case 1:
-                    while(choice==1){
-                        System.out.print("Enter your name: ");
-                        String name = scanner.nextLine();
-                
-                        System.out.print("Enter your age: ");
-                        int age = scanner.nextInt();
-                        scanner.nextLine();
-                
-                        System.out.print("Enter your phone number: ");
-                        String phone = scanner.nextLine();
-                
-                        System.out.print("Enter your email: ");
-                        String email = scanner.nextLine();
-                
-                        System.out.print("Enter your city: ");
-                        String city = scanner.nextLine();
-                
-                        // Create a User object with the collected information
-                        User newUser = new User(name, age, phone, email, city);
-                        userList.add(newUser);
-
-                
-                        // Register the user using the registerUser method
-                        newUser.registerUser("UserDB.txt");
-           
-                        System.out.println("Enter any number to return to home page or 1 to contunue register a volunteer");
-                        choice = getValidIntInput(scanner);
-                    }break;
-                    
-                case 2:
-                    while(choice==2){
-                        registerPetInfo(scanner);
-                        System.out.println("Enter any number to return to home page or 2 to contunue register a Pet");
-                        choice = getValidIntInput(scanner);
-                    }break;
-                    
-                case 3:
-                     displayAllPets(); break;
-                    
-                case 4:
-                    adopt(scanner);
-                    break;
-                    
-                case 5:
-                    System.out.println("Volunteer for the community");
-
-                    // Ask for the user's name
-                    System.out.print("Enter your name: ");
-                    String userName = scanner.nextLine();
-
-                    // Call the updateVolunteerStatus method
-                    User.updateVolunteerStatus(userName, true);
-
-                    break;
-                case 6:
-                    System.out.println("Showing all volunteers:");
-                    User.displayAllVolunteers();
-                    break;
-                case 7: 
-                    addEvent(administrator);
-                    break;
-                case 8: 
-                    administrator.displayAllEvents(Event_File);
-                    break;
-                case 9:
-                    System.out.println("Exiting Get Along with me community System. Goodbye!");
-                    scanner.close();
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid choice. Please select a valid option.");
-            }
-        }
-        
-    }
- //   
     private static void displayEvent(){
 
          System.out.println("\n                Welcome to Get Along with Me Community                ");
