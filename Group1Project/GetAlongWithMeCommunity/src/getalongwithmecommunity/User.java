@@ -42,18 +42,17 @@ public class User {
     }
     
     
-    public void searchForPets(String FILE_NAME){
+    public String searchForPets(String FILE_NAME){
+        String lines="";
         try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if(line.contains("petId"))
-                    System.out.println(line);
-                
+                lines+=line;
             }
-       
         }catch (IOException ex) {
-           System.out.print("error in reading file");
+           return "error in reading file";
         }
+        return lines;
     }
     
     public Pet adoptPet(int petId,ArrayList<Pet>petList){
