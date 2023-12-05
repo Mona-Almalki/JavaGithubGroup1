@@ -25,8 +25,144 @@ public class GetAlongWithMeCommunity {
 
         // to read the info from file
         ReadFile();
+// Determine user type (Admin or Regular User)
+        System.out.println("\n                Welcome to Get Along with Me Community                ");
+        System.out.println("Are you an Admin or a User?");
+        System.out.print("Enter 'admin' or 'user': ");
+        String userType = scanner.nextLine().toLowerCase();
 
-        
+        switch (userType) {
+            case "admin":
+                handleAdminMenu(scanner);
+                break;
+            case "user":
+                handleUserMenu(scanner);
+                break;
+            default:
+                System.out.println("Invalid user type. Exiting the program.");
+                break;
+        }
+    }
+
+    private static void handleUserMenu(Scanner scanner) {
+        while (true) {
+            // Display user menu
+            System.out.println("\n********** User Menu **********");
+            System.out.println("__________________________________");
+            System.out.println("1. User registration");
+            System.out.println("2. Register a Pet");
+            System.out.println("2. Register a Pet");
+            System.out.println("3. Display All Pets");
+            System.out.println("4. Update Volunteer Status");
+            System.out.println("5. Display All Events");
+            System.out.println("6. Exit");
+            System.out.println("__________________________________");
+            System.out.print("\nEnter your choice: ");
+
+            int choice = getValidIntInput(scanner);
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                        System.out.print("Enter your name: ");
+                        String name = scanner.nextLine();
+                
+                        System.out.print("Enter your age: ");
+                        int age = scanner.nextInt();
+                        scanner.nextLine();
+                
+                        System.out.print("Enter your phone number: ");
+                        String phone = scanner.nextLine();
+                
+                        System.out.print("Enter your email: ");
+                        String email = scanner.nextLine();
+                
+                        System.out.print("Enter your city: ");
+                        String city = scanner.nextLine();
+                
+                        // Create a User object with the collected information
+                        User newUser = new User(name, age, phone, email, city);
+                        userList.add(newUser);
+
+                
+                        // Register the user using the registerUser method
+                        newUser.registerUser("UserDB.txt");
+                    }break;
+                case 2:
+                    registerPetInfo(scanner);
+                    break;
+                case 3:
+                    displayAllPets();
+                    break;
+                case 4:
+                     System.out.println("Volunteer for the community");
+
+                    // Ask for the user's name
+                    System.out.print("Enter your name: ");
+                    String userName = scanner.nextLine();
+
+                    // Call the updateVolunteerStatus method
+                    User.updateVolunteerStatus(userName, true);
+                    break;
+                case 5:
+                    administrator.displayAllEvents(Event_File);
+                    break;
+                case 6:
+                    System.out.println("Exiting User Menu. Goodbye!");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
+
+    private static void handleAdminMenu(Scanner scanner) {
+        Adminstrator administrator = new Adminstrator();
+
+        while (true) {
+            // Display admin menu
+            System.out.println("\n********** Admin Menu **********");
+            System.out.println("___________________________________");
+            System.out.println("1. Display All Pets");
+            System.out.println("2. Add Event");
+            System.out.println("3. Display All Events");
+            System.out.println("4. Display All Volunteers");
+            System.out.println("5. Remove Pet");
+            System.out.println("6. Exit");
+            System.out.println("___________________________________");
+            System.out.print("\nEnter your choice: ");
+
+            int choice = getValidIntInput(scanner);
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    administrator.displayAllPets();
+                    break;
+                case 2:
+                    administrator.addEvent(Event_File);
+                    break;
+                case 3:
+                    administrator.displayAllEvents(Event_File);
+                    break;
+                case 4:
+                    User.displayAllVolunteers();
+                    break;
+                case 5:
+                    administrator.removePet(Pet_File);
+                    break;
+                case 6:
+                    System.out.println("Exiting Admin Menu. Goodbye!");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
+
+        //
         while (true) {
             displayMenu() ;
             
@@ -110,36 +246,13 @@ public class GetAlongWithMeCommunity {
         }
         
     }
-    
+ //   
     private static void displayEvent(){
 
          System.out.println("\n                Welcome to Get Along with Me Community                ");
     }
-    
-    //Display menu
-    private static void displayMenu(){
-        System.out.println("\n                Welcome to Get Along with Me Community                ");
-        System.out.println("________________________________________________________________________");
-        System.out.println("Services:");
-        System.out.println("1. User registration");
-        System.out.println("________________________________________________________________________");
-        System.out.println("2. Register a Pet");
-        System.out.println("________________________________________________________________________");
-        System.out.println("3. Show all Pet information");
-        System.out.println("________________________________________________________________________");
-        System.out.println("4. Adopt a Pet");
-        System.out.println("________________________________________________________________________");
-        System.out.println("5. Volunteer for the community");
-        System.out.println("________________________________________________________________________");
-        System.out.println("6. Show all Volunteer information");
-        System.out.println("________________________________________________________________________");
-         System.out.println("7. adding an event");
-        System.out.println("________________________________________________________________________");
-         System.out.println("8. displaying all events");
-        System.out.println("________________________________________________________________________");
-        System.out.println("9. Exit");
-        System.out.print("\nEnter your choice: ");
-    }
+
+      System.out.println("\n                Welcome to Get Along with Me Community                ");
 
 
 
