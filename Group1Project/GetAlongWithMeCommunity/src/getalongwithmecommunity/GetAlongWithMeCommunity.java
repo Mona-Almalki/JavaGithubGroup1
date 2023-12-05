@@ -19,9 +19,8 @@ public class GetAlongWithMeCommunity {
 
     
     public static void main(String[] args) throws IOException {
-        
-        //
         Scanner scanner = new Scanner(System.in);
+        Adminstrator administrator = new Adminstrator();
 
         // to read the info from file
         ReadFile();
@@ -150,7 +149,7 @@ public class GetAlongWithMeCommunity {
                     User.displayAllVolunteers();
                     break;
                 case 5:
-                    administrator.removePet(Pet_File);
+                    removePetFromSystem(administrator, Pet_File);
                     break;
                 case 6:
                     System.out.println("Exiting Admin Menu. Goodbye!");
@@ -435,6 +434,16 @@ private static boolean petExists(int id) {
     }
     System.out.println("______________________________");
 }
+
+
+ private static void removePetFromSystem(Adminstrator administrator, String petFile) {
+        // Ask the admin for the pet ID to remove
+        System.out.print("Enter the Pet ID to remove: ");
+        int petId = getValidIntInput(scanner);
+
+        // Call the removePetFromSystem method from the Adminstrator instance
+        administrator.removePetFromSystem(petFile, petId, petList);
+    }
   
 }
     
