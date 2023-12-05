@@ -67,12 +67,30 @@ public class Adminstrator {
         return true;
     }
     
-    public void addEvent(String FILE_NAME,String eventID,String eventName,String eventDate,String eventPlace){
+     public void addEvent(String FILE_NAME,String eventID,String eventName,String eventDate,String eventPlace){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             writer.write("EventID="+eventID+" ,EventName="+eventName+" ,EventDate="+eventDate+" ,EventPlace="+eventPlace);
             System.out.println("Event information added successfully!");
         } catch (IOException ex) {
             System.out.println("Error in writing to file");
             }
+    }
+    
+    
+    public String getEventById(String fileName, String eventId) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] fields = line.split(",");
+            if (fields.length > 0 && fields[0].contains(eventId)) {
+                return line;}
+        }
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Return null if the event with the specified ID is not found
+        return null;
     }
 }
