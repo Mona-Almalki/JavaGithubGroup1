@@ -44,49 +44,15 @@ public class GetAlongWithMeCommunity {
 
     private static void handleUserMenu(Scanner scanner) {
         while (true) {
-            // Display user menu
-            System.out.println("\n********** User Menu **********");
-            System.out.println("__________________________________");
-            System.out.println("1. User registration");
-            System.out.println("2. Register a Pet");
-            System.out.println("2. Register a Pet");
-            System.out.println("3. Display All Pets");
-            System.out.println("4. Adopt a Pet");
-            System.out.println("5. Update Volunteer Status");
-            System.out.println("6. Display All Events");
-            System.out.println("7. Exit");
-            System.out.println("__________________________________");
-            System.out.print("\nEnter your choice: ");
+            displayUserMenu();
 
             int choice = getValidIntInput(scanner);
             scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                        System.out.print("Enter your name: ");
-                        String name = scanner.nextLine();
-                
-                        System.out.print("Enter your age: ");
-                        int age = getValidIntInput(scanner);
-                        scanner.nextLine();
-                
-                        System.out.print("Enter your phone number: ");
-                        String phone = scanner.nextLine();
-                
-                        System.out.print("Enter your email: ");
-                        String email = scanner.nextLine();
-                
-                        System.out.print("Enter your city: ");
-                        String city = scanner.nextLine();
-                
-                        // Create a User object with the collected information
-                        User newUser = new User(name, age, phone, email, city);
-                        userList.add(newUser);
-
-                
-                        // Register the user using the registerUser method
-                        newUser.registerUser("UserDB.txt");
-                    }break;
+                    registerUser(scanner);
+                    break;
                 case 2:
                     registerPetInfo(scanner);
                     break;
@@ -123,16 +89,7 @@ public class GetAlongWithMeCommunity {
         Adminstrator administrator = new Adminstrator();
 
         while (true) {
-            // Display admin menu
-            System.out.println("\n********** Admin Menu **********");
-            System.out.println("___________________________________");
-            System.out.println("1. Display All Pets");
-            System.out.println("2. Add Event");
-            System.out.println("3. Display All Events");
-            System.out.println("4. Display All Volunteers");
-            System.out.println("5. Exit");
-            System.out.println("___________________________________");
-            System.out.print("\nEnter your choice: ");
+            displayAdminMenu();
 
             int choice = getValidIntInput(scanner);
             scanner.nextLine();
@@ -159,6 +116,55 @@ public class GetAlongWithMeCommunity {
                     System.out.println("Invalid choice. Please select a valid option.");
             }
         }
+    }
+    private static void displayUserMenu() {
+        System.out.println("\n********** User Menu **********");
+        System.out.println("__________________________________");
+        System.out.println("1. User registration");
+        System.out.println("2. Register a Pet");
+        System.out.println("3. Display All Pets");
+        System.out.println("4. Adopt a Pet");
+        System.out.println("5. Update Volunteer Status");
+        System.out.println("6. Display All Events");
+        System.out.println("7. Exit");
+        System.out.println("__________________________________");
+        System.out.print("\nEnter your choice: ");
+    }
+
+    private static void displayAdminMenu() {
+        System.out.println("\n********** Admin Menu **********");
+        System.out.println("___________________________________");
+        System.out.println("1. Display All Pets");
+        System.out.println("2. Add Event");
+        System.out.println("3. Display All Events");
+        System.out.println("4. Display All Volunteers");
+        System.out.println("5. Remove Pet");
+        System.out.println("6. Exit");
+        System.out.println("___________________________________");
+        System.out.print("\nEnter your choice: ");
+    }
+
+    private static void registerUser(Scanner scanner) {
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter your age: ");
+        int age = getValidIntInput(scanner);
+        scanner.nextLine();
+
+        System.out.print("Enter your phone number: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Enter your email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter your city: ");
+        String city = scanner.nextLine();
+
+        User newUser = new User(name, age, phone, email, city);
+        userList.add(newUser);
+
+        newUser.registerUser(USER_FILE);
     }
 
     public void displayAllEvents(String fileName) {
