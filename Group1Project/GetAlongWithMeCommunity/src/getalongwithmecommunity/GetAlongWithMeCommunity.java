@@ -20,8 +20,7 @@ public class GetAlongWithMeCommunity {
     
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        Adminstrator administrator = new Adminstrator();
-
+     
         // to read the info from file
         ReadFile();
 // Determine user type (Admin or Regular User)
@@ -131,8 +130,7 @@ public class GetAlongWithMeCommunity {
             System.out.println("2. Add Event");
             System.out.println("3. Display All Events");
             System.out.println("4. Display All Volunteers");
-            System.out.println("5. Remove Pet");
-            System.out.println("6. Exit");
+            System.out.println("5. Exit");
             System.out.println("___________________________________");
             System.out.print("\nEnter your choice: ");
 
@@ -154,9 +152,6 @@ public class GetAlongWithMeCommunity {
                     User.displayAllVolunteers();
                     break;
                 case 5:
-                    removePetFromSystem(administrator, Pet_File);
-                    break;
-                case 6:
                     System.out.println("Exiting Admin Menu. Goodbye!");
                     scanner.close();
                     System.exit(0);
@@ -378,15 +373,6 @@ private static void addEvent(Adminstrator administrator) {
 
         // Call the addEvent method from the Adminstrator instance
         administrator.addEvent(Event_File, eventID, eventName, eventDate, eventPlace);
-    }
-
- private static void removePetFromSystem(Adminstrator administrator, String petFile) {
-        // Ask the admin for the pet ID to remove
-        System.out.print("Enter the Pet ID to remove: ");
-        int petId = getValidIntInput(scanner);
-
-        // Call the removePetFromSystem method from the Adminstrator instance
-        administrator.removePetFromSystem(petFile, petId, petList);
     }
   
 }
