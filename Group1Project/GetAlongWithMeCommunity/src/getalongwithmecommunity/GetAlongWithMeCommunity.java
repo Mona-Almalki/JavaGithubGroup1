@@ -67,7 +67,7 @@ public class GetAlongWithMeCommunity {
                         String name = scanner.nextLine();
                 
                         System.out.print("Enter your age: ");
-                        int age = scanner.nextInt();
+                        int age = getValidIntInput(scanner);
                         scanner.nextLine();
                 
                         System.out.print("Enter your phone number: ");
