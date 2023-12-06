@@ -355,6 +355,24 @@ private static boolean petExists(int id) {
     System.out.println("______________________________");
 }
 
+private static void addEvent(Adminstrator administrator) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Event ID: ");
+        String eventID = scanner.nextLine();
+
+        System.out.print("Enter Event Name: ");
+        String eventName = scanner.nextLine();
+
+        System.out.print("Enter Event Date: ");
+        String eventDate = scanner.nextLine();
+
+        System.out.print("Enter Event Place: ");
+        String eventPlace = scanner.nextLine();
+
+        // Call the addEvent method from the Adminstrator instance
+        administrator.addEvent(Event_File, eventID, eventName, eventDate, eventPlace);
+    }
 
  private static void removePetFromSystem(Adminstrator administrator, String petFile) {
         // Ask the admin for the pet ID to remove
