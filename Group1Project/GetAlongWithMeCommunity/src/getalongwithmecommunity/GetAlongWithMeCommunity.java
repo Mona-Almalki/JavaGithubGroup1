@@ -184,7 +184,7 @@ public class GetAlongWithMeCommunity {
     // read from file 
     public static void ReadFile() throws IOException{
         
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Pet_File))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -238,7 +238,7 @@ public class GetAlongWithMeCommunity {
 
             petList.add(pet);
             //save it to the file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(Pet_File, true))) {
                 writer.write(pet.toString());
                 writer.newLine();
                 System.out.println("Pet information has been successfully registered.");
@@ -268,7 +268,7 @@ public class GetAlongWithMeCommunity {
 
     // Read the entire file and store its contents
     ArrayList<String> fileContents = new ArrayList<>();
-    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(Pet_File))) {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] petInfo = line.split(",");
@@ -293,7 +293,7 @@ public class GetAlongWithMeCommunity {
     }
 
     // Update the file with modified pet information
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(Pet_File))) {
         for (String line : fileContents) {
             writer.write(line);
             writer.newLine();
