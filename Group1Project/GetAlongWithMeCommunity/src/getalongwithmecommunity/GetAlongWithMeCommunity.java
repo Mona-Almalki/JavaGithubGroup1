@@ -138,8 +138,7 @@ public class GetAlongWithMeCommunity {
         System.out.println("2. Add Event");
         System.out.println("3. Display All Events");
         System.out.println("4. Display All Volunteers");
-        System.out.println("5. Remove Pet");
-        System.out.println("6. Exit");
+        System.out.println("5. Exit");
         System.out.println("___________________________________");
         System.out.print("\nEnter your choice: ");
     }
