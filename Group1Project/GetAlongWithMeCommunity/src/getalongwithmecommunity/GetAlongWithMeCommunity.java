@@ -166,13 +166,19 @@ public class GetAlongWithMeCommunity {
         }
     }
 
-    private static void displayEvent(){
-
-         System.out.println("\n                Welcome to Get Along with Me Community                ");
+    public void displayAllEvents(String fileName) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        String line;
+        System.out.println("All Events:");
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        System.out.println("__________");
+    } catch (IOException e) {
+        e.printStackTrace();
+        System.out.println("Error in reading events from file");
     }
-
-      System.out.println("\n                Welcome to Get Along with Me Community                ");
-
+}
 
 
     // read from file 
