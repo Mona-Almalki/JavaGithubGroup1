@@ -6,33 +6,25 @@ import java.util.ArrayList;
 public class Adminstrator {
     
     
-    public void removePetFromSystem(String FILE_NAME,Pet petToRemove,ArrayList<Pet>petList){
-        if (petToRemove != null) {
-            petList.remove(petToRemove);
-            System.out.println("Pet with ID " + petToRemove.getPetId() + " adopted successfully!");
+   public void removePetFromSystem(String FILE_NAME, Pet petToRemove, ArrayList<Pet> petList) {
+    if (petToRemove != null && petList.contains(petToRemove)) {
+        // Remove the pet from the list in memory
+        petList.remove(petToRemove);
 
         // Read the entire file and store its contents
-            ArrayList<String> fileContents = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                if (!line.startsWith("Volunteer")) { // Exclude volunteer lines
-                    String[] petInfo = line.split(",");
-                    int currentPetId = Integer.parseInt(petInfo[0].split("=")[1]);
-
-                    // Check if the line corresponds to the pet being adopted
-                    if (currentPetId == petToRemove.getPetId()) {
-                        continue; // Skip the line to exclude the adopted pet
-                    }
+        ArrayList<String> fileContents = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Check if the line corresponds to the pet being adopted
+                if (!line.startsWith("petId=" + petToRemove.getPetId())) {
+                    fileContents.add(line);
                 }
-
-                // Add the line to the file contents
-                fileContents.add(line);
             }
-            } catch (IOException ex) {
-                System.out.println("Error in reading from file");
-                return;
-            }
+        } catch (IOException ex) {
+            System.out.println("Error in reading from file");
+            return;
+        }
 
         // Update the file with modified pet information
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
@@ -43,10 +35,12 @@ public class Adminstrator {
             System.out.println("Pet information updated successfully!");
         } catch (IOException ex) {
             System.out.println("Error in writing to file");
-            }
-        } 
-        
+        }
+    } else {
+        System.out.println("Pet not found in the list. No modifications made.");
     }
+}
+
     
     
     public boolean approveAdopting(ArrayList<Pet>petList,int petId){
