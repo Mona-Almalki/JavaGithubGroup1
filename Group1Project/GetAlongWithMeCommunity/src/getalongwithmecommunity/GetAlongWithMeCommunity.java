@@ -60,7 +60,7 @@ public class GetAlongWithMeCommunity {
                     displayAllPets();
                     break;
                 case 4:
-                     adopt(scanner);
+                     adopt();
                     break;
                 case 5:
                      System.out.println("Volunteer for the community");
@@ -73,7 +73,7 @@ public class GetAlongWithMeCommunity {
                     User.updateVolunteerStatus(userName, true);
                     break;
                 case 6:
-                    administrator.displayAllEvents(Event_File);
+                    displayAllEvents(Event_File);
                     break;
                 case 7:
                     System.out.println("Exiting User Menu. Goodbye!");
@@ -96,13 +96,13 @@ public class GetAlongWithMeCommunity {
 
             switch (choice) {
                 case 1:
-                    administrator.displayAllPets();
+                    displayAllPets();
                     break;
                 case 2:
-                    addEvent(scanner, administrator);
+                    addEvent(administrator);
                     break;
                 case 3:
-                    administrator.displayAllEvents(Event_File);
+                    displayAllEvents(Event_File);
                     break;
                 case 4:
                     System.out.println("Showing all volunteers:");
@@ -363,7 +363,8 @@ private static boolean petExists(int id) {
     }
     System.out.println("______________________________");
 }
-public static void addEvent(Scanner scanner, Adminstrator administrator) {
+public static void addEvent(Adminstrator administrator) {
+    Scanner scanner = new Scanner(System.in);
     System.out.println("\n********** Add Event **********");
     // Get event details from the user
     System.out.print("Enter Event ID: ");
@@ -382,7 +383,22 @@ public static void addEvent(Scanner scanner, Adminstrator administrator) {
     administrator.addEvent(Event_File, eventID, eventName, eventDate, eventPlace);
  System.out.println("Event added successfully!");}
 
+    private static void adopt() {
+        Adminstrator admin=new Adminstrator();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Pet ID that you want to adopt: ");
+        int petID = scanner.nextInt();
+        
+        Pet pet=User.adoptPet(petID,petList);
+        if(admin.approveAdopting(petList, petID)){
+            System.out.print("\tAdopting Approve ! ...\nThank you ...");
+            admin.removePetFromSystem(Pet_File, pet, petList);
+        }
+
 }
+
+
     
     
 
