@@ -166,7 +166,7 @@ public class GetAlongWithMeCommunity {
         newUser.registerUser(User_File);
     }
 
-    public void displayAllEvents(String fileName) {
+    private static void displayAllEvents(String fileName) {
     try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
         String line;
         System.out.println("All Events:");
@@ -179,6 +179,7 @@ public class GetAlongWithMeCommunity {
         System.out.println("Error in reading events from file");
     }
 }
+
 
 
     // read from file 
