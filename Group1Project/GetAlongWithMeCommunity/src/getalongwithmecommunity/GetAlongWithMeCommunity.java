@@ -16,7 +16,6 @@ public class GetAlongWithMeCommunity {
     private static final ArrayList<Pet> petList = new ArrayList<>();
     private static final ArrayList<User> userList = new ArrayList<>();
 
-
     
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -39,10 +38,11 @@ public class GetAlongWithMeCommunity {
             default:
                 System.out.println("Invalid user type. Exiting the program.");
                 break;
-        }
-    }
+        }}
+    
 
     private static void handleUserMenu(Scanner scanner) {
+         Adminstrator administrator = new Adminstrator();
         while (true) {
             displayUserMenu();
 
@@ -82,7 +82,7 @@ public class GetAlongWithMeCommunity {
                 default:
                     System.out.println("Invalid choice. Please select a valid option.");
             }
-        }
+        } 
     }
 
     private static void handleAdminMenu(Scanner scanner) {
@@ -99,7 +99,7 @@ public class GetAlongWithMeCommunity {
                     administrator.displayAllPets();
                     break;
                 case 2:
-                    administrator.addEvent(Event_File);
+                    addEvent(scanner, administrator);
                     break;
                 case 3:
                     administrator.displayAllEvents(Event_File);
@@ -163,7 +163,7 @@ public class GetAlongWithMeCommunity {
         User newUser = new User(name, age, phone, email, city);
         userList.add(newUser);
 
-        newUser.registerUser(USER_FILE);
+        newUser.registerUser(User_File);
     }
 
     public void displayAllEvents(String fileName) {
@@ -254,17 +254,19 @@ public class GetAlongWithMeCommunity {
             System.out.println("________________________________________________________________________");
         } 
     }
-
-     System.out.println("\n********** Adopt a Pet **********");
+    public static void adopt(Scanner scanner) {
+    System.out.println("\n********** Adopt a Pet **********");
 
     System.out.print("Enter the pet ID: ");
     int petId = getValidIntInput(scanner);
 
     // Check if the pet with the given ID exists
     if (!petExists(petId)) {
+    {
+        new Adminstrator();
         System.out.println("Pet with ID " + petId + " not found.");
         return;
-    }
+    }}
 
     // Read the entire file and store its contents
     ArrayList<String> fileContents = new ArrayList<>();
@@ -360,26 +362,25 @@ private static boolean petExists(int id) {
     }
     System.out.println("______________________________");
 }
+public static void addEvent(Scanner scanner, Adminstrator administrator) {
+    System.out.println("\n********** Add Event **********");
+    // Get event details from the user
+    System.out.print("Enter Event ID: ");
+    String eventID = scanner.nextLine();
 
-private static void addEvent(Adminstrator administrator) {
-        Scanner scanner = new Scanner(System.in);
+    System.out.print("Enter Event Name: ");
+    String eventName = scanner.nextLine();
 
-        System.out.print("Enter Event ID: ");
-        String eventID = scanner.nextLine();
+    System.out.print("Enter Event Date: ");
+    String eventDate = scanner.nextLine();
 
-        System.out.print("Enter Event Name: ");
-        String eventName = scanner.nextLine();
+    System.out.print("Enter Event Place: ");
+    String eventPlace = scanner.nextLine();
 
-        System.out.print("Enter Event Date: ");
-        String eventDate = scanner.nextLine();
+    // Call the addEvent method in Adminstrator class to add the event
+    administrator.addEvent(Event_File, eventID, eventName, eventDate, eventPlace);
+ System.out.println("Event added successfully!");}
 
-        System.out.print("Enter Event Place: ");
-        String eventPlace = scanner.nextLine();
-
-        // Call the addEvent method from the Adminstrator instance
-        administrator.addEvent(Event_File, eventID, eventName, eventDate, eventPlace);
-    }
-  
 }
     
     
